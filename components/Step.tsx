@@ -4,9 +4,10 @@ interface IStepProps {
   number?: string;
   title: string;
   children?: ReactNode;
+  isLast?: boolean;
 }
 
-const Step = ({ number, title, children }: IStepProps) => {
+const Step = ({ number, title, children, isLast }: IStepProps) => {
   return (
     <div className="flex gap-6">
       {number && (
@@ -17,7 +18,7 @@ const Step = ({ number, title, children }: IStepProps) => {
           <div className="w-px h-full bg-border"></div>
         </div>
       )}
-      <div className="flex flex-1 flex-col gap-2 pb-16">
+      <div className={`flex flex-1 flex-col gap-2 ${!isLast && "pb-16"}`}>
         <span className="text-xl tracking-tighter font-black">{title}</span>
         {children && children}
       </div>

@@ -23,7 +23,7 @@ const StepsSection = ({ componentCode }: { componentCode: string }) => {
   const handleCopy = () => {};
 
   return (
-    <div className="max-w-3xl z-10 ">
+    <div className="max-w-3xl z-10 px-2 md:px-4">
       <Step title="Get your data" number="1">
         <span className="font-light text-base text-foreground-secondary">
           You can use your own data but it’s recommended to use the{" "}
@@ -59,6 +59,18 @@ const StepsSection = ({ componentCode }: { componentCode: string }) => {
           </button>
         </div>
         {open && <CodeBlock language={"typescript"} code={componentCode} />}
+      </Step>
+      <Step title="Implement with style 😎" number="3" isLast>
+        <span className="font-light text-base text-foreground-secondary">
+          You can use one of the templates below or customize yourself with the{" "}
+          <Link
+            className="text-foreground underline cursor-pointer"
+            href="#props-section"
+          >
+            <span>props</span>
+          </Link>
+        </span>
+        <div className="flex"></div>
       </Step>
     </div>
   );

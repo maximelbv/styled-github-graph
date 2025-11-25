@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState, useMemo, CSSProperties, FC } from "react";
 
 type Contribution = { date: string; count: number; level: number };

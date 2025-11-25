@@ -15,6 +15,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, language }) => {
       language={language}
       style={oneDark}
       wrapLines
+      wrapLongLines
       customStyle={{
         background: "#18181b",
         border: "solid 1px #27272a",
