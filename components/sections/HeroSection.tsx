@@ -1,6 +1,6 @@
 const HeroSection = () => {
   return (
-    <div className="flex flex-col items-center justify-end h-[60svh]">
+    <div className="flex flex-col items-center justify-end h-[65svh]">
       <h1 className="tracking-tighter text-8xl font-black">
         Styled Github Graph
       </h1>

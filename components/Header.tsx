@@ -37,7 +37,10 @@ const Header = () => {
             transition={{ delay: 0.85, duration: 0.3, ease: [0.8, 0, 0, 1] }}
             className="absolute right-4 flex items-center justify-center"
           >
-            <Link target="_blank" href={""}>
+            <Link
+              target="_blank"
+              href={"https://github.com/maximelbv/styled-github-graph"}
+            >
               <GithubIcon />
             </Link>
           </motion.div>
