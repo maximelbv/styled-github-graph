@@ -6,6 +6,7 @@ import ArrowIcon from "../svg/ArrowIcon";
 import CodeBlock from "../CodeBlock";
 import CopyIcon from "../svg/CopyIcon";
 import { useState } from "react";
+import { Slide, toast } from "react-toastify";
 
 const apiInstall: string = `git clone https://github.com/grubersjoe/github-contributions-api.git
 cd github-contributions-api
@@ -20,7 +21,22 @@ const StepsSection = ({ componentCode }: { componentCode: string }) => {
     setOpen(!open);
   };
 
-  const handleCopy = () => {};
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(componentCode);
+    toast("Copied to Clipboard", {
+      position: "bottom-right",
+      transition: Slide,
+      hideProgressBar: true,
+      closeButton: false,
+      style: {
+        background: "#23232a",
+        border: "1px solid #27272a",
+        color: "#fff",
+        fontWeight: "500",
+        fontFamily: "Bricolage Grotesque",
+      },
+    });
+  };
 
   return (
     <div className="max-w-3xl z-10 px-2 md:px-4">

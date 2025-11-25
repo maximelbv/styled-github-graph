@@ -16,7 +16,6 @@ export default function Home() {
       <HeroSection />
       <StepsSection componentCode={coponentCode} />
       <TemplatesSection />
-
       <PropsSection />
     </div>
   );
