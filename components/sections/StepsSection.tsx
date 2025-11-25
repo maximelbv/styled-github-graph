@@ -55,7 +55,7 @@ const StepsSection = ({ componentCode }: { componentCode: string }) => {
             <span>Copy</span>
           </button>
           <button onClick={handleClick} className="cursor-pointer underline">
-            View Raw
+            {open ? "Close" : "View Raw"}
           </button>
         </div>
         {open && <CodeBlock language={"typescript"} code={componentCode} />}
