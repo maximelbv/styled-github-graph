@@ -11,24 +11,28 @@ interface CodeBlockProps {
 
 const CodeBlock: React.FC<CodeBlockProps> = ({ code, language }) => {
   return (
-    <SyntaxHighlighter
-      language={language}
-      style={oneDark}
-      wrapLines
-      wrapLongLines
-      customStyle={{
-        background: "#18181b",
-        border: "solid 1px #27272a",
-      }}
-      codeTagProps={{
-        style: {
+    <div style={{ overflowX: "auto", maxWidth: "100%" }}>
+      <SyntaxHighlighter
+        language={language}
+        style={oneDark}
+        wrapLines
+        wrapLongLines
+        customStyle={{
           background: "#18181b",
-          maxWidth: "100%",
-        },
-      }}
-    >
-      {code}
-    </SyntaxHighlighter>
+          border: "solid 1px #27272a",
+          whiteSpace: "pre-wrap",
+          wordBreak: "break-word",
+        }}
+        codeTagProps={{
+          style: {
+            background: "#18181b",
+            maxWidth: "100%",
+          },
+        }}
+      >
+        {code}
+      </SyntaxHighlighter>
+    </div>
   );
 };
 

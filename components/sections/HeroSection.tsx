@@ -1,10 +1,10 @@
 const HeroSection = () => {
   return (
-    <div className="flex flex-col items-center justify-end h-[65svh] px-2 md:px-4 mb-24">
-      <h1 className="tracking-tighter text-8xl font-black">
+    <div className="p-2 sm:p-4 flex flex-col items-start sm:items-center justify-end mt-6 sm:mt-12 md:mt-20 lg:mt-36 xl:mt-[20svw]  px-2 md:px-4 sm:mb-24">
+      <h1 className="tracking-tighter text-4xl lg:text-6xl xl:text-8xl font-black">
         Styled Github Graph
       </h1>
-      <span className="text-lg text-foreground-secondary max-w-[500px] text-center">
+      <span className="text-start sm:text-center text-base lg:text-lg text-foreground-secondary max-w-[400px] lg:max-w-[500px]">
         A simple Typescript / React component to integrate your GitHub activity
         into any website or application, with a sleek, customizable design !
       </span>

@@ -10,10 +10,13 @@ const coponentCode = await readFileContent("components/StyledGithubGraph.tsx");
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center gap-8">
-      <div className="absolute -top-8 w-full z-0">
+      <div className="hidden sm:block absolute -top-8 w-full z-0">
         <HeroBackground />
       </div>
-      <HeroSection />
+      <div className="w-full z-999">
+        <HeroSection />
+      </div>
+
       <StepsSection componentCode={coponentCode} />
       <TemplatesSection />
       <PropsSection />

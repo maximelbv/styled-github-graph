@@ -6,7 +6,7 @@ import ArrowIcon from "../svg/ArrowIcon";
 import CodeBlock from "../CodeBlock";
 import CopyIcon from "../svg/CopyIcon";
 import { useState } from "react";
-import { Slide, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const apiInstall: string = `git clone https://github.com/grubersjoe/github-contributions-api.git
 cd github-contributions-api
@@ -25,7 +25,6 @@ const StepsSection = ({ componentCode }: { componentCode: string }) => {
     await navigator.clipboard.writeText(componentCode);
     toast("Copied to Clipboard", {
       position: "bottom-right",
-      transition: Slide,
       hideProgressBar: true,
       closeButton: false,
       style: {
@@ -39,7 +38,7 @@ const StepsSection = ({ componentCode }: { componentCode: string }) => {
   };
 
   return (
-    <div className="max-w-3xl z-10 px-2 md:px-4">
+    <div className="max-w-3xl z-10 px-2 md:px-4 pl-4">
       <Step title="Get your data" number="1">
         <span className="font-light text-base text-foreground-secondary">
           You can use your own data but it’s recommended to use the{" "}
