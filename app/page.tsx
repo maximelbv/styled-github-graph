@@ -9,7 +9,7 @@ const coponentCode = await readFileContent("components/StyledGithubGraph.tsx");
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center gap-8">
+    <div className="min-h-screen flex flex-col items-center gap-8 mb-8">
       <div className="hidden sm:block absolute -top-8 w-full z-0">
         <HeroBackground />
       </div>
