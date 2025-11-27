@@ -23,6 +23,7 @@ const themes = {
 } as const;
 
 type Theme = keyof typeof themes;
+
 type Props = {
   username: string;
   apiBaseUrl?: string;
@@ -33,6 +34,7 @@ type Props = {
   theme?: Theme;
   enableTooltip?: boolean;
   displayName?: boolean;
+  serverData?: Contribution[];
 };
 
 const getTileColor = (level: number, theme: Theme) =>
@@ -128,25 +130,25 @@ const GithubContributionGraph: FC<Props> = ({
   theme = "green",
   enableTooltip = true,
   displayName = false,
+  serverData,
 }) => {
-  const [contributions, setContributions] = useState<Contribution[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [contributions, setContributions] = useState<Contribution[]>(
+    serverData || []
+  );
+  const [loading, setLoading] = useState(!serverData);
 
   useEffect(() => {
+    if (serverData) return;
     fetchContributions(`${apiBaseUrl}/v4/${username}?y=last`)
       .then(setContributions)
       .catch((err) =>
         console.error("Failed to fetch GitHub contributions:", err)
       )
       .finally(() => setLoading(false));
-  }, [username, apiBaseUrl]);
+  }, [username, apiBaseUrl, serverData]);
 
   const grid = useMemo(() => {
-    const today = new Date();
-    const currentDayIndex = today.getDay();
-    const fullWeeks = columns - 1;
-    const expected =
-      rows === 7 ? fullWeeks * 7 + currentDayIndex + 1 : rows * columns;
+    const expected = rows * columns;
     const padded = padContributions(contributions.slice(-expected), expected);
     return generateGrid(padded, rows, columns);
   }, [contributions, rows, columns]);
@@ -178,17 +180,15 @@ const GithubContributionGraph: FC<Props> = ({
           </div>
         ))}
       </div>
-      <div>
-        {displayName && (
-          <a
-            style={{ color: "#A1A1AA" }}
-            target="_blank"
-            href={`https://github.com/${username}`}
-          >
-            @{username}
-          </a>
-        )}
-      </div>
+      {displayName && (
+        <a
+          style={{ color: "#A1A1AA" }}
+          target="_blank"
+          href={`https://github.com/${username}`}
+        >
+          @{username}
+        </a>
+      )}
     </div>
   );
 };

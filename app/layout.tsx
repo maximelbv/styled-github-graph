@@ -19,7 +19,7 @@ const jersey = Jersey_10({
 export const metadata: Metadata = {
   title: "Styled Github Graph",
   description:
-    "A simple Typescript / React component to integrate your GitHub activity into any website or application, with a sleek, customizable design !",
+    "A server-ready Typescript / React component to display your GitHub activity with a sleek, customizable design!",
 };
 
 export default function RootLayout({

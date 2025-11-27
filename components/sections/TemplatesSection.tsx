@@ -1,15 +1,19 @@
 import GithubContributionGraph from "../StyledGithubGraph";
 import TemplateWrapper from "../TemplateWrapper";
 
+type Contribution = { date: string; count: number; level: number };
+
 const graphData = [
   {
     props: {
       username: "torvalds",
       columns: 20,
+      displayName: true,
     },
     codeToCopy: `<GithubContributionGraph
   username="torvalds"
   columns={20}
+  displayName: true
 />`,
   },
   {
@@ -143,11 +147,34 @@ const graphData = [
   {
     props: {
       username: "torvalds",
+      rows: 7,
+      columns: 20,
+      theme: "green",
+      tileStyles: {
+        borderRadius: "4px",
+        clipPath:
+          "polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%)",
+        width: "12px",
+        height: "12px",
+      },
+      gridStyles: { gap: "4px" },
+    },
+    codeToCopy: `<GithubContributionGraph
+  username="torvalds"
+  rows={7}
+  columns={3}
+  theme="green"
+  tileStyles={{ borderRadius: "4px", width: "100px", height: "30px" }}
+  gridStyles={{ gap: "1px" }}
+/>`,
+  },
+  {
+    props: {
+      username: "torvalds",
       rows: 16,
       columns: 20,
       theme: "orange",
       tileStyles: { borderRadius: "3px", width: "7px", height: "7px" },
-      enableTooltip: false,
     },
     codeToCopy: `<GithubContributionGraph
   username="torvalds"
@@ -155,7 +182,6 @@ const graphData = [
   columns={20}
   theme="orange"
   tileStyles={{ borderRadius: "3px", width: "7px", height: "7px" }}
-  enableTooltip={false}
 />`,
   },
   {
@@ -174,28 +200,6 @@ const graphData = [
   theme="yellow"
   tileStyles={{ borderRadius: "20px", width: "20px", height: "20px" }}
   displayName={true}
-/>`,
-  },
-  {
-    props: {
-      username: "torvalds",
-      rows: 7,
-      columns: 3,
-      theme: "green",
-      tileStyles: {
-        borderRadius: "4px",
-        width: "100px",
-        height: "30px",
-      },
-      gridStyles: { gap: "1px" },
-    },
-    codeToCopy: `<GithubContributionGraph
-  username="torvalds"
-  rows={7}
-  columns={3}
-  theme="green"
-  tileStyles={{ borderRadius: "4px", width: "100px", height: "30px" }}
-  gridStyles={{ gap: "1px" }}
 />`,
   },
   {
@@ -244,12 +248,44 @@ const graphData = [
   },
 ] as const;
 
-const TemplatesSection = () => {
+const apiBaseUrl = "https://github-contributions-api.jogruber.de";
+
+const fetchContributions = async (
+  username: string
+): Promise<Contribution[]> => {
+  const res = await fetch(`${apiBaseUrl}/v4/${username}?y=last`, {
+    next: { revalidate: 3600 },
+  });
+  console.log("Fetching contributions for", username);
+  const data = await res.json();
+  return data.contributions || [];
+};
+
+const TemplatesSection = async () => {
+  const usernames = Array.from(
+    new Set(graphData.map((item) => item.props.username))
+  );
+  const contributionsMap = Object.fromEntries(
+    await Promise.all(
+      usernames.map(async (username) => [
+        username,
+        await fetchContributions(username),
+      ])
+    )
+  );
+  const graphDataWithServer = graphData.map((item) => ({
+    ...item,
+    serverData: contributionsMap[item.props.username],
+  }));
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-2 md:px-4 w-full max-w-[1400px]">
-      {graphData.map((item, i) => (
+      {graphDataWithServer.map((item, i) => (
         <TemplateWrapper key={i} codeToCopy={item.codeToCopy}>
-          <GithubContributionGraph {...item.props} />
+          <GithubContributionGraph
+            {...item.props}
+            serverData={item.serverData}
+          />
         </TemplateWrapper>
       ))}
     </div>

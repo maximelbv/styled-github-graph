@@ -1,5 +1,5 @@
 # Styled Github Graph
 
-A simple Typescript / React component to integrate your GitHub activity into any website or application, with a sleek, customizable design.
+A server-ready Typescript / React component to display your GitHub activity with a sleek, customizable design.
 
 → https://styled-github-graph.vercel.app/

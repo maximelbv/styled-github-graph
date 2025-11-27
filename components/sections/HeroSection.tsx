@@ -5,8 +5,8 @@ const HeroSection = () => {
         Styled Github Graph
       </h1>
       <span className="text-start sm:text-center text-base lg:text-lg text-foreground-secondary max-w-[400px] lg:max-w-[500px]">
-        A simple Typescript / React component to integrate your GitHub activity
-        into any website or application, with a sleek, customizable design !
+        A server-ready Typescript / React component to display your GitHub
+        activity with a sleek, customizable design!
       </span>
     </div>
   );

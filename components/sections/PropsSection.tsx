@@ -54,6 +54,13 @@ const props = [
     default: "false",
     description: "Whether to enable the username.",
   },
+  {
+    property: "serverData",
+    type: "Contribution[]",
+    default: "undefined",
+    description:
+      "Optional pre-fetched contributions to avoid client-side fetch. Use this for server-rendering.",
+  },
 ];
 
 const PropsSection = () => {
